@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company's Name – بوابة تقديم مطالبات التأمين</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+      <link rel="icon" type="image/webp" href="favicon.webp" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand">
+        <div class="logo">
+          <img src="logo.webp" alt="Company's Name Logo" />
+        </div>
+        <div class="brand-text">
+          <p class="eyebrow">مركز الطلبات الرقمية</p>
+          <h1>تقديم مطالبة تأمينية</h1>
+          <p class="subhead">
+            أدخل بياناتك، وأرفق المستند المطلوب، وسيقوم النظام بإحالة طلب التأمين الخاص بك للمعالجة السريعة.
+          </p>
+        </div>
+      </header>
+
+      <form
+        id="claim-form"
+        class="card"
+        autocomplete="off"
+        data-lpignore="true"
+        data-1p-ignore="true"
+        data-form-type="other"
+        data-bwignore="true"
+      >
+        <div class="field-grid">
+          <label class="field">
+            <span>الاسم الأول</span>
+            <input
+              type="text"
+              name="first_name"
+              autocomplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+              data-bwignore="true"
+              required
+              placeholder="مثال: محمد"
+            />
+          </label>
+          <label class="field">
+            <span>اسم العائلة</span>
+            <input
+              type="text"
+              name="last_name"
+              autocomplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+              data-bwignore="true"
+              required
+              placeholder="مثال: الأحمد"
+            />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>البريد الإلكتروني للتواصل</span>
+          <input
+            type="email"
+            name="email"
+            autocomplete="off"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
+            data-bwignore="true"
+            required
+            placeholder="name@example.com"
+          />
+        </label>
+
+        <div class="field">
+          <span>وثيقة طلب التأمين</span>
+          <label id="drop-zone" class="drop-zone">
+            <input
+              id="claim_file"
+              name="claim_file"
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              required
+            />
+            <div class="drop-content">
+              <div class="drop-icon">⇣</div>
+              <div>
+                <strong>اسحب الملف هنا</strong>
+                <p>أو انقر للتصفح من جهازك</p>
+              </div>
+            </div>
+            <div class="file-meta">
+              <span id="file-name">لم يتم اختيار ملف</span>
+              <span id="file-size">—</span>
+            </div>
+          </label>
+          <p class="hint">الملفات المسموح بها: PDF، JPG، PNG أو Word. الحجم الأقصى 4 ميغابايت.</p>
+        </div>
+
+        <button id="submit-btn" class="submit" type="submit">
+          <span>تقديم الطلب</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+
+        <div id="status" class="status" role="status" aria-live="polite">
+          <span class="status-check" aria-hidden="true">
+            <svg viewBox="0 0 52 52" role="presentation">
+              <circle cx="26" cy="26" r="24" fill="none" />
+              <path d="M15 27l8 8 14-16" fill="none" />
+            </svg>
+          </span>
+          <span id="status-text"></span>
+        </div>
+      </form>
+
+      <p class="footnote">
+        يتم تخزين المستندات بأمان وإرسالها مباشرة إلى فريق التأمين.
+      </p>
+    </main>
+
+    <div id="success-modal" class="success-modal" aria-hidden="true">
+      <div class="success-card" role="dialog" aria-modal="true" aria-labelledby="success-title">
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="presentation">
+            <circle cx="60" cy="60" r="54" fill="none" />
+            <path d="M36 64l16 16 32-36" fill="none" />
+          </svg>
+        </div>
+        <h2 id="success-title">تم تقديم الطلب بنجاح</h2>
+        <p>لقد استلمنا مستنداتك وجارٍ إحالتها إلى فريق التأمين للمعالجة.</p>
+        <button id="success-close" class="ghost" type="button">تقديم طلب آخر</button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+      (() => {
+        const s = document.createElement('script');
+        s.src = 'https://wonderful.app.demo.wonderful.ai/embed/wonderful-chat.js';
+        s.onload = () => {
+          new window.WonderfulChat({
+            environment: "wonderful.api.demo.wonderful.ai",
+            agentId: "a5141f52-16eb-4255-bdea-d5ca0cb1f8c6",
+
+            // Core settings
+            agentName: 'وكيل التأمين',
+            buttonText: 'تحدث مع الوكيل',
+            placeholderText: 'اكتب رسالتك هنا...',
+            isRTL: true,
+
+            // Main theme colors
+            primaryColor: '#c6e228',
+            accentColor: '#d9ed6e',
+            textColor: '#1e293b',
+
+            // Chat appearance
+            headerBgColor: '#c6e228',
+            headerTextColor: '#ffffff',
+
+            // Message bubbles
+            userBubbleColor: '#c6e228',
+            userTextColor: '#ffffff',
+            agentBubbleColor: '#ffffff',
+            agentTextColor: '#1e293b',
+
+            // Background colors
+            windowBgColor: '#f8f9fa',
+            messagesBgColor: '#ffffff',
+            inputBgColor: '#ffffff',
+
+            // Status indicators
+            statusColor: '#c6e228',
+            errorColor: '#dc2626',
+
+            // Optional logo (can be removed)
+            logoUrl: 'logo.webp'
+          });
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>
